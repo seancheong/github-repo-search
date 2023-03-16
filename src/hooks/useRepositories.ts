@@ -6,8 +6,9 @@ import { getRepositories } from '../services/repositoryService';
  * Custom hook to search repositories from Github
  * based on search query and page number
  *
- * Enabled query setting has been disabled inside the hook,
- * refetch has to be called for fetching repositories
+ * Enabled query setting has been set to only enabled
+ * when both query and page are not empty.
+ * This is to prevent useQuery fetch data on mount
  *
  * @param query (string)
  * @param page (number)
@@ -18,7 +19,7 @@ const useRepositories = (query: string, page: number) => {
     [QueryKeys.repositories, query, page],
     () => getRepositories(query, page),
     {
-      enabled: false,
+      enabled: !!query && !!page,
     }
   );
 };
