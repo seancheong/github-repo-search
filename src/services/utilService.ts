@@ -8,9 +8,12 @@
  * @param interval (milliseconds)
  * @returns generic return type of the passed in function
  */
-export const throttle = <T>(fn: (...args: unknown[]) => T, interval = 500) => {
+export const throttle = <T, K extends unknown[]>(
+  fn: (...args: K) => T,
+  interval = 500
+) => {
   let shouldWait = false;
-  let waitingArgs: unknown[] | null = null;
+  let waitingArgs: K | null = null;
   const timeoutCallback = () => {
     if (waitingArgs === null) {
       shouldWait = false;
@@ -21,7 +24,7 @@ export const throttle = <T>(fn: (...args: unknown[]) => T, interval = 500) => {
     }
   };
 
-  return (...args: unknown[]) => {
+  return (...args: K) => {
     if (shouldWait) {
       waitingArgs = args;
       return;
