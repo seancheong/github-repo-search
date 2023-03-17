@@ -4,6 +4,7 @@ import './App.css';
 import { SearchForm } from './components/common/SearchForm';
 import useRepositories from './hooks/useRepositories';
 import useThrottle from './hooks/useThrottle';
+import { RepositoriesTable } from './components/repositories/RepositoriesTable';
 
 function App() {
   const [query, setQuery] = useState('');
@@ -22,6 +23,8 @@ function App() {
         inputPlaceholder="e.g. React, Vue, Python, etc."
         onSearch={handleSearch}
       />
+
+      {data && <RepositoriesTable repositories={data} />}
     </div>
   );
 }

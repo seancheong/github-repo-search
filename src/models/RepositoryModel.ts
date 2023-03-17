@@ -75,7 +75,7 @@ export interface RepositoryItem {
   size: number;
   stargazers_count: number;
   watchers_count: number;
-  language: string;
+  language: string | null;
   has_issues: boolean;
   has_projects: boolean;
   has_downloads: boolean;
@@ -83,7 +83,7 @@ export interface RepositoryItem {
   has_pages: boolean;
   has_discussions: boolean;
   forks_count: number;
-  mirror_url: string;
+  mirror_url: string | null;
   archived: boolean;
   disabled: boolean;
   open_issues_count: number;
@@ -93,7 +93,7 @@ export interface RepositoryItem {
     spdx_id: string;
     url: string;
     node_id: string;
-  };
+  } | null;
   allow_forking: boolean;
   is_template: boolean;
   web_commit_signoff_required: boolean;
