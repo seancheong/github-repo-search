@@ -1,5 +1,6 @@
 import React from 'react';
 import { RepositoryItem } from '../../models';
+import { formatDateTime } from '../../services/utilService';
 import './Repository.scoped.css';
 
 type Props = {
@@ -31,7 +32,7 @@ export const Repository: React.FC<Props> = ({
 
           <div className="metadata">
             <span>Updated at: </span>
-            <span>{updated_at}</span>
+            <span>{formatDateTime(updated_at)}</span>
           </div>
         </div>
       </div>
