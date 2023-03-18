@@ -1,16 +1,9 @@
 import React from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { SearchForm } from './SearchForm';
 
-const renderComponent = () => {
-  const queryClient = new QueryClient();
-
-  render(
-    <QueryClientProvider client={queryClient}>
-      <SearchForm inputPlaceholder="" onSearch={jest.fn} />
-    </QueryClientProvider>
-  );
+const renderComponent = (handleSearch = jest.fn) => {
+  render(<SearchForm inputPlaceholder="" onSearch={handleSearch} />);
 };
 
 describe('SearchForm', () => {
@@ -34,5 +27,22 @@ describe('SearchForm', () => {
 
     // then
     expect(button.getAttribute('disabled')).toBeNull();
+  });
+
+  test('clicking on button will trigger onSearch with text inside input box', () => {
+    // given
+    const searchString = 'search string';
+    const handleSearch = jest.fn();
+
+    renderComponent(handleSearch);
+    const input = screen.getByRole('textbox');
+    const button = screen.getByRole('button', { name: /search/i });
+
+    // when
+    fireEvent.change(input, { target: { value: searchString } });
+    button.click();
+
+    // then
+    expect(handleSearch).toHaveBeenCalledWith(searchString);
   });
 });

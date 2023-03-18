@@ -20,6 +20,7 @@ const useRepositories = (query: string, page: number) => {
     () => getRepositories(query, page),
     {
       enabled: !!query && !!page,
+      keepPreviousData: true,
     }
   );
 };

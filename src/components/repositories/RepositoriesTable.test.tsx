@@ -8,7 +8,6 @@ describe('RepositoriesTable', () => {
     // given
     render(<RepositoriesTable repositories={repositories} />);
 
-    // when
     const list = screen.getByRole('list');
 
     const withinList = within(list);

@@ -9,6 +9,7 @@ button {
   border-radius: 6px;
   white-space: nowrap;
   cursor: pointer;
+  width: 100px;
 }
 
 button.disabled {
