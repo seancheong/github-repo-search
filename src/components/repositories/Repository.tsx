@@ -9,15 +9,22 @@ type Props = {
 };
 
 export const Repository: React.FC<Props> = ({
-  item: { full_name, description, url, stargazers_count, language, updated_at },
+  item: {
+    full_name,
+    description,
+    html_url,
+    stargazers_count,
+    language,
+    updated_at,
+  },
 }) => {
   return (
     <li className="repository">
       <div className="container">
         <h3>{full_name}</h3>
         <div>{description}</div>
-        <a className="text-sm" href={url}>
-          {url}
+        <a className="text-sm" href={html_url}>
+          {html_url}
         </a>
 
         <div className={classNames('sub-container', 'text-xs')}>

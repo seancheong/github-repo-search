@@ -27,7 +27,10 @@ describe('RepositoriesTable', () => {
     // then
     expect(items.length).toBe(5);
     expect(firstItemHeader?.innerHTML).toBe(repositories.items[0].full_name);
-    expect(firstItemLink).toHaveAttribute('href', repositories.items[0].url);
+    expect(firstItemLink).toHaveAttribute(
+      'href',
+      repositories.items[0].html_url
+    );
     expect(firstItemUpdatedDateTime?.innerHTML).toBe('16 hours ago');
   });
 
