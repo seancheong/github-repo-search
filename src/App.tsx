@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import 'normalize.css';
 import './App.css';
 import { SearchForm } from './components/common/SearchForm';
@@ -14,7 +14,15 @@ function App() {
   const throttledQuery = useThrottle(query);
   const [page, setPage] = useState(1);
   const throttledPage = useThrottle(page);
-  const { data, isFetching } = useRepositories(throttledQuery, throttledPage);
+  const { data, isFetching, isError } = useRepositories(
+    throttledQuery,
+    throttledPage
+  );
+
+  useEffect(() => {
+    // reset the page number if query is changed
+    setPage(1);
+  }, [query]);
 
   const handleSearch = (input: string) => {
     setQuery(input);
@@ -27,18 +35,28 @@ function App() {
         onSearch={handleSearch}
       />
 
-      <Loader isLoading={isFetching}>
-        <div className="repositories-table">
-          {data && <RepositoriesTable repositories={data} />}
-        </div>
-      </Loader>
+      {isError && (
+        <h2 className="error-message">
+          Sorry, something went wrong. Please try again later.
+        </h2>
+      )}
 
-      {data && (
-        <Pagination
-          currentPage={page}
-          totalPages={Math.ceil(data.total_count / MAX_REPOS_PER_PAGE)}
-          onPageChange={(newPage) => setPage(newPage)}
-        />
+      {!isError && (
+        <>
+          <Loader isLoading={isFetching}>
+            <div className="repositories-table">
+              {data && <RepositoriesTable repositories={data} />}
+            </div>
+          </Loader>
+
+          {data && (
+            <Pagination
+              currentPage={page}
+              totalPages={Math.ceil(data.total_count / MAX_REPOS_PER_PAGE)}
+              onPageChange={(newPage) => setPage(newPage)}
+            />
+          )}
+        </>
       )}
     </div>
   );

@@ -38,3 +38,7 @@
 .repositories-table {
   height: 65vh;
 }
+
+.error-message {
+  color: rgb(192 57 43);
+}
