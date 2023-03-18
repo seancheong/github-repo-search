@@ -1,31 +1,42 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 /**
  * Custom hook of throttle implementation
  * It's accepting a value as the first parameter,
- * and it will limit the number of times of that function
+ * and it will limit the number of times of that value
  * is returned during an interval
  *
  * @param value (any)
- * @param interval (milliseconds)
+ * @param interval (milliseconds, default to 500ms)
  * @returns value
  */
 const useThrottle = <T>(value: T, interval = 500) => {
-  const [throttledValue, setThrottledValue] = useState<T>(value);
-  const isThrottling = useRef(false);
+  const [throttledValue, setThrottledValue] = useState(value);
+  const [lastValue, setLastValue] = useState(value);
+  const [lastExecutedTime, setLastExecutedTime] = useState(Date.now());
 
   useEffect(() => {
-    if (!isThrottling.current) {
-      setThrottledValue(value);
-      isThrottling.current = true;
+    if (value !== lastValue) {
+      const now = Date.now();
+      const timeElapsedSinceLastExecution = now - lastExecutedTime;
 
-      setTimeout(() => {
-        if (isThrottling.current) {
-          isThrottling.current = false;
-        }
-      }, interval);
+      if (timeElapsedSinceLastExecution >= interval) {
+        setThrottledValue(value);
+        setLastExecutedTime(now);
+      } else {
+        const timeoutId = setTimeout(() => {
+          setThrottledValue(value);
+          setLastExecutedTime(Date.now());
+        }, interval - timeElapsedSinceLastExecution);
+
+        return () => {
+          clearTimeout(timeoutId);
+        };
+      }
+
+      setLastValue(value);
     }
-  }, [value, interval]);
+  }, [value, interval, lastValue, lastExecutedTime]);
 
   return throttledValue;
 };

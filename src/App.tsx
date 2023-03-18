@@ -13,7 +13,7 @@ function App() {
   const [query, setQuery] = useState('');
   const throttledQuery = useThrottle(query);
   const [page, setPage] = useState(1);
-  const throttledPage = useThrottle(page);
+  const throttledPage = useThrottle(page, 1000);
   const { data, isFetching, isError } = useRepositories(
     throttledQuery,
     throttledPage
