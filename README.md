@@ -4,6 +4,8 @@ It is a simple web application that allows you to search for Github repositories
 
 The entire application is built using the latest version of React 18 and Typescript, utilizing React hooks to manage state and logic. Besides that, The application also includes unit tests written using Jest and React Testing Library. 
 
+<img src="https://user-images.githubusercontent.com/13078313/226105350-c7e7de57-5ac5-43ad-867b-bd734fd566ea.png" width=50% height=50%>
+
 ## Highlights
 
 - Implemented using [React 18](https://react.dev/) and [Typescript](https://www.typescriptlang.org/)
