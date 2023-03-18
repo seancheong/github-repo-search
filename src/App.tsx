@@ -10,6 +10,7 @@ import { Loader } from './components/common/Loader';
 import { MAX_REPOS_PER_PAGE } from './constants';
 
 function App() {
+  const [input, setInput] = useState('');
   const [query, setQuery] = useState('');
   const throttledQuery = useThrottle(query);
   const [page, setPage] = useState(1);
@@ -20,18 +21,27 @@ function App() {
   );
 
   useEffect(() => {
-    // reset the page number if query is changed
-    setPage(1);
-  }, [query]);
+    if (isError) {
+      // reset the input string if there's an error
+      setInput('');
+    }
+  }, [isError]);
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInput(event.target.value);
+  };
 
   const handleSearch = (input: string) => {
     setQuery(input);
+    setPage(1);
   };
 
   return (
     <div className="App">
       <SearchForm
+        input={input}
         inputPlaceholder="e.g. React, Vue, Python, etc."
+        onInputChange={handleInputChange}
         onSearch={handleSearch}
       />
 

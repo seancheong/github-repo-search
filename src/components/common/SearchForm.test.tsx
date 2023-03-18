@@ -1,9 +1,26 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
-import { SearchForm } from './SearchForm';
+import { render, screen } from '@testing-library/react';
+import { SearchForm, Props } from './SearchForm';
 
-const renderComponent = (handleSearch = jest.fn) => {
-  render(<SearchForm inputPlaceholder="" onSearch={handleSearch} />);
+const renderComponent = (props: Partial<Props> = {}) => {
+  const componentProps: Props = {
+    input: '',
+    inputPlaceholder: '',
+    onInputChange: jest.fn(),
+    onSearch: jest.fn(),
+    ...props,
+  };
+
+  const { input, inputPlaceholder, onInputChange, onSearch } = componentProps;
+
+  render(
+    <SearchForm
+      input={input}
+      inputPlaceholder={inputPlaceholder}
+      onInputChange={onInputChange}
+      onSearch={onSearch}
+    />
+  );
 };
 
 describe('SearchForm', () => {
@@ -18,12 +35,10 @@ describe('SearchForm', () => {
 
   test('button is enabled when the input box is not empty', () => {
     // given
-    renderComponent();
-    const input = screen.getByRole('textbox');
-    const button = screen.getByRole('button', { name: /search/i });
+    const searchString = 'search string';
 
-    // when
-    fireEvent.change(input, { target: { value: 'hello test' } });
+    renderComponent({ input: searchString });
+    const button = screen.getByRole('button', { name: /search/i });
 
     // then
     expect(button.getAttribute('disabled')).toBeNull();
@@ -34,12 +49,10 @@ describe('SearchForm', () => {
     const searchString = 'search string';
     const handleSearch = jest.fn();
 
-    renderComponent(handleSearch);
-    const input = screen.getByRole('textbox');
+    renderComponent({ input: searchString, onSearch: handleSearch });
     const button = screen.getByRole('button', { name: /search/i });
 
     // when
-    fireEvent.change(input, { target: { value: searchString } });
     button.click();
 
     // then

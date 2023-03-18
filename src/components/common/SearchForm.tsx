@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Input } from './Input';
 import { Button } from './Button';
 import './SearchForm.scoped.css';
 
-type Props = {
+export type Props = {
+  input: string;
   inputPlaceholder: string;
+  onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onSearch: (input: string) => void;
 };
 
-export const SearchForm: React.FC<Props> = ({ inputPlaceholder, onSearch }) => {
-  const [input, setInput] = useState('');
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInput(event.target.value);
-  };
-
+export const SearchForm: React.FC<Props> = ({
+  input,
+  inputPlaceholder,
+  onInputChange,
+  onSearch,
+}) => {
   const handleFormSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
     onSearch(input);
@@ -26,7 +27,7 @@ export const SearchForm: React.FC<Props> = ({ inputPlaceholder, onSearch }) => {
         input={input}
         type="text"
         placeholder={inputPlaceholder}
-        onChange={handleInputChange}
+        onChange={onInputChange}
       />
       <Button disabled={!input}>Search</Button>
     </form>
