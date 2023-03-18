@@ -4,6 +4,10 @@ import { RepositoriesTable } from './RepositoriesTable';
 import { repositories } from '../../test';
 
 describe('RepositoriesTable', () => {
+  beforeAll(() => {
+    jest.useFakeTimers().setSystemTime(new Date('2023-03-18T04:00:00Z'));
+  });
+
   test('table is correctly rendered', () => {
     // given
     render(<RepositoriesTable repositories={repositories} />);
@@ -25,5 +29,9 @@ describe('RepositoriesTable', () => {
     expect(firstItemHeader?.innerHTML).toBe(repositories.items[0].full_name);
     expect(firstItemLink).toHaveAttribute('href', repositories.items[0].url);
     expect(firstItemUpdatedDateTime?.innerHTML).toBe('16 hours ago');
+  });
+
+  afterAll(() => {
+    jest.useRealTimers();
   });
 });
