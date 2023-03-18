@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 import { RepositoryItem } from '../../models';
 import { formatDateTime } from '../../services/utilService';
@@ -19,7 +20,7 @@ export const Repository: React.FC<Props> = ({
           {url}
         </a>
 
-        <div className="sub-container">
+        <div className={classNames('sub-container', 'text-xs')}>
           <div className="metadata">
             <span>Stars: </span>
             <span>{stargazers_count}</span>

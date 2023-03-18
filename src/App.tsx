@@ -42,7 +42,7 @@ function App() {
       )}
 
       {!isError && (
-        <>
+        <div className="data-container">
           <Loader isLoading={isFetching}>
             <div className="repositories-table">
               {data && <RepositoriesTable repositories={data} />}
@@ -56,7 +56,7 @@ function App() {
               onPageChange={(newPage) => setPage(newPage)}
             />
           )}
-        </>
+        </div>
       )}
     </div>
   );
