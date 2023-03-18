@@ -1,0 +1,15 @@
+.container {
+  position: relative;
+}
+
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}

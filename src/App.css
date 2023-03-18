@@ -34,3 +34,7 @@
     transform: rotate(360deg);
   }
 }
+
+.repositories-table {
+  height: 65vh;
+}

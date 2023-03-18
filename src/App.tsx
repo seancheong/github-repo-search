@@ -6,6 +6,7 @@ import useRepositories from './hooks/useRepositories';
 import useThrottle from './hooks/useThrottle';
 import { RepositoriesTable } from './components/repositories/RepositoriesTable';
 import { Pagination } from './components/common/Pagination';
+import { Loader } from './components/common/Loader';
 import { MAX_REPOS_PER_PAGE } from './constants';
 
 function App() {
@@ -13,25 +14,10 @@ function App() {
   const throttledQuery = useThrottle(query);
   const [page, setPage] = useState(1);
   const throttledPage = useThrottle(page);
-  const { data } = useRepositories(throttledQuery, throttledPage);
+  const { data, isFetching } = useRepositories(throttledQuery, throttledPage);
 
   const handleSearch = (input: string) => {
     setQuery(input);
-  };
-
-  const renderRepositories = () => {
-    if (data) {
-      return (
-        <>
-          <RepositoriesTable repositories={data} />
-          <Pagination
-            currentPage={page}
-            totalPages={Math.ceil(data.total_count / MAX_REPOS_PER_PAGE)}
-            onPageChange={(newPage) => setPage(newPage)}
-          />
-        </>
-      );
-    }
   };
 
   return (
@@ -41,7 +27,19 @@ function App() {
         onSearch={handleSearch}
       />
 
-      {renderRepositories()}
+      <Loader isLoading={isFetching}>
+        <div className="repositories-table">
+          {data && <RepositoriesTable repositories={data} />}
+        </div>
+      </Loader>
+
+      {data && (
+        <Pagination
+          currentPage={page}
+          totalPages={Math.ceil(data.total_count / MAX_REPOS_PER_PAGE)}
+          onPageChange={(newPage) => setPage(newPage)}
+        />
+      )}
     </div>
   );
 }
