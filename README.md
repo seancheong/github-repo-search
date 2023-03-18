@@ -1,6 +1,25 @@
-# Getting Started with Create React App
+# Github Repository Search
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+It is a simple web application that allows you to search for Github repositories using the Github API's [search repositories](https://docs.github.com/en/rest/search?apiVersion=2022-11-28#search-repositories). Once you enter a search string, it retrieves a list of matching repositories from the API and displays them on the screen.
+
+The entire application is built using the latest version of React 18 and Typescript, utilizing React hooks to manage state and logic. Besides that, The application also includes unit tests written using Jest and React Testing Library. 
+
+## Highlights
+
+- Implemented using [React 18](https://react.dev/) and [Typescript](https://www.typescriptlang.org/)
+- Make use of [React Query](https://react-query-v3.tanstack.com/) for data fetching
+- Added throttling for making API calls
+- Added unit tests using [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/). p.s. React Hooks codes are not covered in unit tests yet, as the react-hooks from testing-library is no longer supported in React 18
+- Responsive designs that can be used in both browser and mobile devices
+
+## TODOs
+
+- Add unit tests for React Hooks
+- Add E2E tests using Cypress
+
+## Warning
+
+Please note that the Github API being used in this application is the free version, which has a rate limit of __10 requests per minute__. Therefore, error message will be shown if the rate limit is exceeded. If that happens, you will just need to try the application again later.
 
 ## Available Scripts
 
@@ -41,6 +60,4 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).

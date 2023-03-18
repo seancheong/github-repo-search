@@ -1,6 +1,7 @@
 {
   "name": "github-repo-search",
-  "version": "0.1.0",
+  "description": "A web application allows you to search Github's repositories. It's built using React 18, Typescript, and React Query.",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -38,6 +39,15 @@
     "build": "craco build",
     "test": "craco test ",
     "eject": "react-scripts eject"
+  },
+  "keywords": [
+    "react",
+    "typescript",
+    "jest"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seancheong/github-repo-search.git"
   },
   "eslintConfig": {
     "extends": [
