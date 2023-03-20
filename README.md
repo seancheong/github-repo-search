@@ -14,6 +14,14 @@ The entire application is built using the latest version of React 18 and Typescr
 - Added unit tests using [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/). p.s. React Hooks codes are not covered in unit tests yet, as the react-hooks from testing-library is no longer supported in React 18
 - Responsive designs that can be used in both browser and mobile devices
 
+## Instructions
+```sh
+git clone https://github.com/seancheong/github-repo-search.git
+cd github-repo-search
+npm install
+npm run start
+```
+
 ## TODOs
 
 - Add unit tests for React Hooks
